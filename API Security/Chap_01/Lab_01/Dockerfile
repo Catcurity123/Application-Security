@@ -32,3 +32,12 @@ RUN java -version && mvn -version && git --version && curl --version
 
 # Default command to keep the container running
 CMD ["bash"] 
+
+# To build this docker file
+# ==> docker build -t java-maven-img .
+
+## To run the container first time (with bindmount, name, port)
+# ==> mkdir -p ${volume_name} ===> mkdir -p ${pwd}/opt/AppData
+# ==> docker run -itd --name JavaApp --mount type=bind,src=${pwd}/opt/AppData,dst=/app --publish 8080:8080 java-maven-img:latest
+# ==> docker exec -it ${container_id} bash
+# NOTE: This needs to be run on powershell as git bash does not have the permission to mkdir

@@ -26,3 +26,6 @@ CREATE INDEX msg_timestamp_idx ON messages(msg_time);
 
 -- Create unique index on space name
 CREATE UNIQUE INDEX space_name_idx ON spaces(name);
+
+CREATE USER natter_api_user PASSWORD 'password';     
+GRANT SELECT, INSERT ON spaces, messages TO natter_api_user; 
