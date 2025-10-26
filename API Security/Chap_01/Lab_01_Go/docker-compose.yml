@@ -1,0 +1,42 @@
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: myappdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    ports:
+      - "3306:3306"
+
+  goapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.go
+    container_name: go_dev
+    volumes:
+      - ./app:/app
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_USER=appuser
+      - DB_PASSWORD=apppassword
+      - DB_HOST=mysql
+      - DB_NAME=myappdb
+    stdin_open: true
+    tty: true
+
+#docker-compose -p go_lab up --build
+#docker compose -p go_lab down --rmi all
+#docker rmi go_lab-goapp go_lab-mysql
+
+
+### TO DEBUG ###
+#docker ps -a
+#docker logs <id>

@@ -37,7 +37,10 @@ CMD ["bash"]
 # ==> docker build -t java-maven-img .
 
 ## To run the container first time (with bindmount, name, port)
-# ==> mkdir -p ${volume_name} ===> mkdir -p ${pwd}/opt/AppData
+# ==> mkdir -p ${volume_name} ===> mkdir -p ${pwd} /opt/AppData for Linux mkdir -p $(pwd)/opt/AppData
 # ==> docker run -itd --name JavaApp --mount type=bind,src=${pwd}/opt/AppData,dst=/app --publish 8080:8080 java-maven-img:latest
 # ==> docker exec -it ${container_id} bash
 # NOTE: This needs to be run on powershell as git bash does not have the permission to mkdir
+
+
+#docker run -itd --name GoApp --mount type=bind,src=$(pwd)/opt/AppData,dst=/app --publish 8080:8081 go-dev:latest
