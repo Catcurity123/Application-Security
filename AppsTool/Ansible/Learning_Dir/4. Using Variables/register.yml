@@ -1,0 +1,15 @@
+  GNU nano 7.2                              see_dir_cont.yml
+# see_dir_cont.yml
+
+---
+ -  hosts: webservers[1]
+    vars:
+      path_to_app: /var/www/html
+    tasks:
+      - name: See dir content
+        command: ls -la {{path_to_app}}
+        register: dir_contents
+
+      - name: Debug Dir content
+        debug:
+          msg: "{{dir_contents}}"

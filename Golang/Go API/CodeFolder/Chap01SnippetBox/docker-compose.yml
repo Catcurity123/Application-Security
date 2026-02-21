@@ -1,0 +1,13 @@
+services:
+
+  goapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.go 
+    container_name: go_dev
+    volumes:
+    - ./app:/GoCode
+    ports:
+    - "8081:4000"
+    stdin_open: true
+    tty: true

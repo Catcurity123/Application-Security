@@ -1,0 +1,12 @@
+# stop_apache.yml
+
+---
+  - hosts: webservers:loadbalancers
+    become: true
+    gather_facts: false
+    tasks:
+      - name: Stop apache on all servers
+        service:
+          name: httpd
+          state: stopped
+          enabled: no

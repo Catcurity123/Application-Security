@@ -1,0 +1,50 @@
+# Server_Initial_setup.yml
+
+---
+
+  - hosts: all
+    gather_facts: false
+    tasks:
+      - name: Test Server connection
+        action: ping
+        
+  - hosts: webservers:loadbalancers
+    gather_facts: false
+    become: true
+    tasks:
+      - name: Update package management
+        yum: name=* state=latest
+      
+  - hosts: webservers
+    gather_facts: false
+    become: true
+    tasks:
+      - name: Install apache and php
+        yum: 
+          name: 
+            - httpd
+            - php
+          state: present
+        
+
+  - hosts: loadbalancers 
+    gather_facts: false
+    become: true
+    tasks:
+      - name: Install apache
+        yum:
+          name: 
+            - httpd
+          state: present
+
+  - hosts: webservers:loadbalancers
+    gather_facts: false
+    become: true
+    tasks:
+      - name: Start Apache on all Servers
+        service:
+          name: httpd
+          state: started
+          enabled: yes
+
+

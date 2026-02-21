@@ -1,0 +1,12 @@
+# start_apache.yml
+
+---
+  - hosts: webservers:loadbalancers
+    become: true
+    gather_facts: false
+    tasks:
+      - name: Start apache on all webservers
+        service:
+          name: httpd
+          state: started
+          enabled: yes

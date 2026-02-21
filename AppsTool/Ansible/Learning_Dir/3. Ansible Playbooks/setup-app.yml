@@ -1,0 +1,29 @@
+# setup-app.yml
+
+---
+  - hosts: webservers
+    become: true
+    gather_facts: false
+    tasks:
+      - name: Set up index file
+        copy: 
+          src: index.php
+          dest: /var/www/html
+          mode: 0755
+
+      - name: Set up info file
+        copy: 
+          dest: /var/www/html/info.php
+          content: "<h1> This is information about {{ ansible_hostname }} </h1>"
+
+        vars: 
+          path_to_app: /var/www/html
+          another_varialbe: somethingelse
+        tasks: 
+          - name: Set up another info file
+            copy:
+              dest: {{ path_to_app }}/info2.php
+              content: "<h1> Hello world again </h1>"
+
+
+          

@@ -1,0 +1,14 @@
+# setup-app.yml
+
+---
+  - hosts: webservers
+    become: true
+    gather_facts: false
+    tasks:
+      - name: Set up index file
+        copy: 
+          src: ../index.php
+          dest: /var/www/html
+          mode: 0755
+
+          

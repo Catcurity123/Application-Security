@@ -1,0 +1,12 @@
+# all_playbooks.yml
+
+---
+  - import_playbook: ping.yml
+  - import_playbook: yum-update.yml
+  - import_playbook: install-service.yml
+  - import_playbook: setup-app.yml
+  - import_playbook: setup-lb.yml
+  - import_playbook: start_apache.yml
+
+
+  
